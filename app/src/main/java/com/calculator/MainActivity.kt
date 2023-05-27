@@ -9,24 +9,16 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // Represent whether the lastly pressed key is numeric or not
     var lastNumeric: Boolean = false
 
-    // If true, do not allow to add another DOT
     var lastDot: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //This call the parent constructor
         super.onCreate(savedInstanceState)
-        // This is used to align the xml view to this class
         setContentView(R.layout.activity_main)
-        /*This is implemented by android studio it self when we select the Basic Activity while creating the project.*/
         setSupportActionBar(toolbar)
     }
 
-    /**
-     * Appends the numeric Button.text to the TextView
-     */
     fun onDigit(view: View) {
         // text of button is appended to textView
         tvInput.append((view as Button).text)
@@ -72,28 +64,22 @@ class MainActivity : AppCompatActivity() {
      * Calculate the output
      */
     fun onEqual(view: View) {
-        // If the last input is a number only, solution can be found.
         if (lastNumeric) {
-            // Read the textView value
             var value = tvInput.text.toString()
             var prefix = ""
             try {
-
-                // Here if the value starts with '-' then we will separate it and perform the calculation with value.
                 if (value.startsWith("-")) {
                     prefix = "-"
                     value = value.substring(1);
                 }
 
-                // If the inputValue contains the Division operator
                 if (value.contains("/")) {
-                    // Will split the inputValue using Division operator
                     val splitedValue = value.split("/")
 
-                    var one = splitedValue[0] // Value One
-                    val two = splitedValue[1] // Value Two
+                    var one = splitedValue[0]
+                    val two = splitedValue[1]
 
-                    if (!prefix.isEmpty()) { // If the prefix is not empty then we will append it with first value i.e one.
+                    if (!prefix.isEmpty()) {
                         one = prefix + one
                     }
 
@@ -103,24 +89,22 @@ class MainActivity : AppCompatActivity() {
 
                     val splitedValue = value.split("*")
 
-                    var one = splitedValue[0] // Value One
-                    val two = splitedValue[1] // Value Two
+                    var one = splitedValue[0]
+                    val two = splitedValue[1]
 
-                    if (!prefix.isEmpty()) { // If the prefix is not empty then we will append it with first value i.e one.
+                    if (!prefix.isEmpty()) {
                         one = prefix + one
                     }
 
                     tvInput.text = removeZeroAfterDot((one.toDouble() * two.toDouble()).toString())
                 } else if (value.contains("-")) {
 
-                    // If the inputValue contains the Subtraction operator
-                    // Will split the inputValue using Subtraction operator
                     val splitedValue = value.split("-")
 
-                    var one = splitedValue[0] // Value One
-                    val two = splitedValue[1] // Value Two
+                    var one = splitedValue[0]
+                    val two = splitedValue[1]
 
-                    if (!prefix.isEmpty()) { // If the prefix is not empty then we will append it with first value i.e one.
+                    if (!prefix.isEmpty()) {
                         one = prefix + one
                     }
 
